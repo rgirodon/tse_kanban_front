@@ -104,6 +104,8 @@
 <script>
 import axios from 'axios';
 
+import authHeader from '../utils/authHeader';
+
 export default {
   name: 'AddTask',
   data: function() {
@@ -148,6 +150,9 @@ export default {
                 id: item
               }
             })
+          },
+          { 
+            headers: authHeader(this.$store.state) 
           })
         .then(() => {
 

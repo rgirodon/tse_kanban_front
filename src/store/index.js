@@ -4,13 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex);
 
-function authHeader(state) {
-  if (state.accessToken) {
-    return { Authorization: 'Bearer ' + state.accessToken };
-  } else {
-    return {};
-  }
-}
+import authHeader from '../utils/authHeader';
 
 export default new Vuex.Store({
   state: {    
@@ -70,12 +64,12 @@ export default new Vuex.Store({
       axios
         .post(process.env.VUE_APP_BACKEND_BASE_URL + '/oauth/token?scope=any&grant_type=client_credentials',
           {
-            
+
           },
           {
             auth: {
-              username: 'clientId',
-              password: 'clientSecret'
+              username: process.env.VUE_APP_CLIENT_ID,
+              password: process.env.VUE_APP_CLIENT_SECRET
             }
           }
         )
